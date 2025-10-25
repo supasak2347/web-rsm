@@ -1,0 +1,25 @@
+version: "3.8" # Use a modern version
+
+services:
+  resume:
+    # 1. Build the image using the Dockerfile in the current directory
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # 2. Map the host port 3001 to the container port 3001
+    #    (as specified by ENV PORT=3001 in the Dockerfile)
+    ports:
+      - "3001:3001"
+
+    # 3. Set the container name for easy identification
+    container_name: nextjs-resume-app
+
+    # 4. Restart the container if it stops unexpectedly
+    restart: always
+
+    # 5. Define environment variables needed by Next.js or Node.js (optional, but good practice)
+    environment:
+      # Although set in Dockerfile, redefining here ensures clarity and easy override
+      - PORT=3001
+      # Note: basePath is set in next.config.mjs, so no need to set it here
